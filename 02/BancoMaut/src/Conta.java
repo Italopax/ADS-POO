@@ -16,14 +16,14 @@ public class Conta {
             return;
         }
         saldo += deposito;
-        System.out.println("Operação executada com sucesso."); 
+        System.out.println("Depósito executado com sucesso."); 
         getSaldo();
     }
 
     public void sacar(double saque){
         if(saldo>=saque){
             saldo -= saque;
-            System.out.println("Operação executada com sucesso.");
+            System.out.println("Saque executado com sucesso.");
         } else {
             System.out.println("Você não tem saldo suficiente para efetuar a operação.");
         }
@@ -46,13 +46,21 @@ public class Conta {
         return this.cliente;
     }
 
-    public void transferir(){
-        
+    public void transferir(Conta conta, float valor){
+        if(valor <= 0) {
+            System.out.println("O valor a ser transferido não pode ser igual ou inferior a 0.");
+            return;
+        }
+        if(this.saldo < valor) {
+            System.out.println("No momento, o seu saldo é insuficiente para fazer essa transferência.");
+            return;
+        }
+        this.saldo -= valor;
+        conta.receberTranferencia(valor);
+        System.out.println("Ao transferir " + valor + " R$, o valor do seu saldo é: " + this.saldo + " R$.");
     }
-    
-}
 
-// deposito negativo  **
-// não tem set dos atributos, mas tem os gets  **
-// passar os atributos com o constructor  **
-// transferencia: transferir apenas da sua para outra
+    public void receberTranferencia(float valor){
+        this.saldo += valor;
+    }   
+}
