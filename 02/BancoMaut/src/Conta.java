@@ -10,24 +10,26 @@ public class Conta {
         this.cliente = cliente;
     }
     
-    public void depositar(double deposito){
+    public boolean depositar(double deposito){
         if(deposito<=0){
             System.out.println("Essa operação não pôde ser realizada."); 
-            return;
+            return false;
         }
         saldo += deposito;
         System.out.println("Depósito executado com sucesso."); 
         getSaldo();
+        return true;
     }
 
-    public void sacar(double saque){
+    public boolean sacar(double saque){
         if(saldo>=saque){
             saldo -= saque;
             System.out.println("Saque executado com sucesso.");
+            return true;
         } else {
             System.out.println("Você não tem saldo suficiente para efetuar a operação.");
+            return false;
         }
-        getSaldo();
     }
 
     public double getSaldo(){
@@ -47,20 +49,10 @@ public class Conta {
     }
 
     public void transferir(Conta conta, float valor){
-        if(valor <= 0) {
-            System.out.println("O valor a ser transferido não pode ser igual ou inferior a 0.");
+        if (this.sacar(valor)){
+            conta.depositar(valor);
+            System.out.println("Ao transferir " + valor + " R$, o valor do seu saldo é: " + this.saldo + " R$.");
             return;
         }
-        if(this.saldo < valor) {
-            System.out.println("No momento, o seu saldo é insuficiente para fazer essa transferência.");
-            return;
-        }
-        this.saldo -= valor;
-        conta.receberTranferencia(valor);
-        System.out.println("Ao transferir " + valor + " R$, o valor do seu saldo é: " + this.saldo + " R$.");
     }
-
-    public void receberTranferencia(float valor){
-        this.saldo += valor;
-    }   
 }

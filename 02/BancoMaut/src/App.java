@@ -9,7 +9,7 @@ public class App {
         // cliente1.setNome("Sales");
         // cliente1.setEndereco("Picos");
 
-        System.out.println("");
+        // System.out.println("");
 
         // System.out.println("CLIENTE:");
         // System.out.println("Nome: " + cliente1.getNome());
@@ -27,7 +27,7 @@ public class App {
 
         Conta conta2 = new Conta(22202, 666888, cliente1);
 
-        System.out.println("");
+        // System.out.println("");
 
         System.out.println(conta1.getSaldo());
         System.out.println(conta2.getSaldo());
